@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Research — Xianchao Liu</title>
-<meta name="description" content="Research on gate drive for GaN transistors and multi-chip GaN power modules for 800 V data-center and EV power conversion.">
+<meta name="description" content="Gate-drive and packaging research for high-current GaN HEMTs: partial-bootstrap gate driver, temperature-adaptive NTC gate-resistor array, and a 650 V / 400 A multi-chip GaN half-bridge module for 800 V EV and data-center power conversion.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -32,73 +32,114 @@
     <h1>Research</h1>
     <p class="role">Packaging and gate-drive design methods for high-current GaN power modules in 800&nbsp;V data-center and EV systems.</p>
     <p>
-      A GaN HEMT switches in a few nanoseconds, but only if its gate loop and its package let it. My research
-      treats the die, the gate drive, and the module as one design problem, in two connected thrusts.
+      GaN HEMTs have the best switching figure of merit among commercial power semiconductors, yet they are still
+      missing from the converters that would gain the most from it. GaN has been confined below a few kilowatts,
+      where a single die carries the whole load; the on-board chargers, fast chargers, and traction inverters of
+      electric vehicles process hundreds of amperes and are still built from Si and SiC. Three barriers stand in
+      the way: the narrow gate window of the p-GaN gate, the strong temperature dependence of the switching
+      transient, and a fine-pitch lateral die that resists paralleling. My dissertation,
+      <em>Switching Modeling, Driver Technology and Packaging of GaN HEMTs in High-Current Applications</em>,
+      addresses each of them at the gate-drive and package level.
     </p>
 
     <section class="thrust" id="gate-drive">
       <div>
-        <h3>1. Gate drive for GaN gate-injection transistors</h3>
-        <p class="spec">CoolGaN 650 V G5 GIT · partial-bootstrap gate driver (PBGD) · NTC temperature-adaptive gate-resistor array · double-pulse test platform</p>
+        <h3>1. Gate-drive voltage: the partial-bootstrap gate driver</h3>
+        <p class="spec">650 V p-GaN HEMT (GS-065-150) · turn-on loss vs. gate oscillation · no extra isolated supply, inductor, or control channel</p>
         <p>
-          Infineon's CoolGaN 650&nbsp;V G5 devices are gate-injection transistors (GITs): the p-GaN gate behaves
-          as a diode that must be held on with a steady current and switched through a few-nanosecond transition
-          without ringing. I design gate-drive circuits built around that gate: a partial-bootstrap gate driver (PBGD), an NTC-based
-          temperature-adaptive gate-resistor array that suppresses crosstalk and keeps switching speed up as the
-          module heats, and a double-pulse test (DPT) platform for characterizing switching loss, dv/dt, and
-          gate-loop parasitics.
+          An enhancement-mode p-GaN HEMT leaves the driver only a few volts between the Miller plateau and the
+          gate's absolute maximum, so a driver fast enough to cut turn-on loss is also one that invites
+          gate-source oscillation. The partial-bootstrap gate driver (PBGD) resolves this by stacking a
+          self-limiting bootstrap capacitor onto the drive rail only during the Miller plateau: the voltage-fall
+          interval that dominates turn-on loss is accelerated, while the current-rise interval that sets di/dt is
+          left untouched, so turn-on loss and turn-on overvoltage fall together. Double-pulse tests on 650&nbsp;V /
+          150&nbsp;A devices confirm the mechanism, and a closed-loop version whose timing is triggered by the
+          drain voltage, so that it adapts itself to load, temperature, and device size, is now in test.
+          I also work on gate drivers for gate-injection transistors (GITs), whose p-GaN gate is held on by a
+          steady current rather than a voltage.
+        </p>
+      </div>
+      <figure class="figure">
+        <a href="assets/pbgd-circuit.png"><img src="assets/pbgd-circuit.png" alt="Schematic of the partial-bootstrap gate driver: an isolated partial-bootstrap turn-on circuit and a conventional turn-off circuit driving a GaN HEMT" width="875" height="689"></a>
+        <figcaption>Partial-bootstrap gate driver (PBGD): a partial-bootstrap turn-on stage that lifts the drive rail only during the Miller plateau, with a conventional turn-off stage.</figcaption>
+      </figure>
+    </section>
+
+    <section class="thrust" id="temperature">
+      <div>
+        <h3>2. Temperature-adaptive switching: the NTC gate-resistor array</h3>
+        <p class="spec">−25 °C to 100 °C · wide-temperature transient model · series–parallel NTC array · three passive components</p>
+        <p>
+          A GaN HEMT's threshold voltage barely moves with temperature while its transconductance falls, so the
+          device switches more slowly the hotter it gets, the opposite of Si and SiC, whose falling threshold
+          compensates. At the same time the crosstalk constraint that sets the gate resistance relaxes with
+          temperature, so a fixed gate resistor sized at the cold corner wastes margin everywhere else. I built a
+          wide-temperature transient model of the GaN half-bridge, coupling a temperature-dependent channel-current
+          model with calibrated nonlinear junction capacitances, and used it to extract the minimum safe gate
+          resistance at each temperature; a series–parallel array of negative-temperature-coefficient (NTC)
+          resistors is then fitted to that trajectory by constrained optimization. From −25&nbsp;°C to
+          100&nbsp;°C the array cuts turn-on time by 30% and turn-on loss by 23% at 300&nbsp;V, 120&nbsp;A, and
+          100&nbsp;°C, keeps the peak crosstalk voltage below the threshold at every operating point, and needs
+          only three passive components.
         </p>
         <p class="related">Related: <a href="publications.html#compel2025">COMPEL 2025</a></p>
       </div>
-      <div class="figures">
-        <figure class="figure">
-          <a href="assets/gate-temperature.png"><img src="assets/gate-temperature.png" alt="Transfer characteristics of GaN HEMT, SiC MOSFET and Si MOSFET at two junction temperatures, and the resulting trends of switching speed, switching loss and crosstalk voltage versus temperature" width="1200" height="990"></a>
-          <figcaption>GaN HEMT transconductance falls as the junction heats, unlike SiC and Si MOSFETs, so a fixed gate resistance loses switching speed and gains loss with temperature — the case for a temperature-adaptive gate resistor.</figcaption>
-        </figure>
-        <figure class="figure">
-          <a href="assets/pbgd-circuit.png"><img src="assets/pbgd-circuit.png" alt="Schematic of the partial-bootstrap gate driver: an isolated partial-bootstrap turn-on circuit and a conventional turn-off circuit driving a GaN GIT" width="875" height="689"></a>
-          <figcaption>Partial-bootstrap gate driver (PBGD): a partial-bootstrap turn-on stage and a conventional turn-off stage for a GaN GIT.</figcaption>
-        </figure>
-      </div>
+      <figure class="figure">
+        <a href="assets/gate-temperature.png"><img src="assets/gate-temperature.png" alt="Transfer characteristics of GaN HEMT, SiC MOSFET and Si MOSFET at two junction temperatures, and the resulting trends of switching speed, switching loss and crosstalk voltage versus temperature" width="1200" height="990"></a>
+        <figcaption>Why the gate resistance must follow temperature: GaN transconductance falls as the junction heats, unlike SiC and Si MOSFETs, so a fixed gate resistor loses switching speed and gains loss with temperature while the crosstalk margin goes unused.</figcaption>
+      </figure>
     </section>
 
     <section class="thrust" id="modules">
       <div>
-        <h3>2. Multi-chip GaN power modules</h3>
-        <p class="spec">650 V / 400 A half-bridge · paralleled GaN dies on DBC · ultra-low parasitics · dynamic current sharing · via-in-pad interconnect</p>
+        <h3>3. Multi-chip packaging: a 650 V / 400 A GaN half-bridge module</h3>
+        <p class="spec">three 650 V / 150 A dies per switch · thin-copper interface PCB · via-in-pad vertical current paths · integrated gate drivers · double-sided cooling</p>
         <p>
-          Reaching the hundreds of amperes needed by traction inverters and rack-level converters means several
-          GaN dies must switch in parallel as one device. I packaged a 650&nbsp;V / 400&nbsp;A GaN half-bridge
-          power module with ultra-low parasitics on a direct-bonded-copper (DBC) substrate: a symmetric layout for
-          balanced dynamic current sharing, verified with LTspice and Ansys Q3D parasitic extraction; thermal
-          design for robustness under high-current operation; and via-in-pad interconnects between the gate-drive
-          board and the dies, with design guidelines for their thermal and electrical performance.
+          The largest 650&nbsp;V GaN die is rated at 150&nbsp;A, two to four times short of what an EV phase leg
+          needs, so dies must be paralleled, and with nanosecond transitions, nanohenry-level mismatch decides
+          whether they share current. Modeling showed that the mismatch in source inductance, not in gate-loop
+          inductance, dominates the dynamic current imbalance: a fraction of a nanohenry is enough to unbalance the
+          dies. The module answers with a thin-copper interface PCB that carries the fine-pitch die attachment and
+          the gate drivers and connects to the heavy-copper power routing through via-in-pad vertical current
+          paths, so the two can be optimized separately; the symmetric layout holds the source-inductance
+          mismatch below 9&nbsp;pH and the power loop measures 1.62&nbsp;nH, and both faces of the module stay
+          free for heatsinks. The module is rated 650&nbsp;V / 400&nbsp;A and validated at 400&nbsp;V / 300&nbsp;A
+          in double-pulse tests and under continuous load with double-sided cooling.
         </p>
         <p class="related">Related: <a href="publications.html#iwipp2025">IWIPP 2025</a></p>
       </div>
       <figure class="figure">
         <a href="assets/module-structure.png"><img src="assets/module-structure.png" alt="Cross-section of the GaN half-bridge power module: dies on a cutout DBC with the gate driver in the cutout, an interface PCB joined by solder, a power-layout PCB, and heatsinks on both sides" width="1200" height="555"></a>
-        <figcaption>Stack-up of the 650 V / 400 A module: GaN dies on a cutout DBC with the gate driver inside the cutout, an interface PCB joined by solder, the power-layout PCB above it, and heatsinks on both sides.</figcaption>
+        <figcaption>Stack-up of the module: GaN dies on a cutout DBC with the gate driver inside the cutout, a thin-copper interface PCB joined by solder, the heavy-copper power-layout PCB above it, and heatsinks on both faces.</figcaption>
       </figure>
     </section>
 
+    <h2>In progress</h2>
+    <ul>
+      <li><strong>Closed-loop PBGD.</strong> Experimental validation of the drain-voltage-triggered driver over temperature, gate resistance, and load current.</li>
+      <li><strong>Adaptive gate resistance on a 60&nbsp;A platform.</strong> Extending the NTC design into a design map over temperature and load current, with the loss saving against a fixed gate resistor quantified from measurements.</li>
+      <li><strong>Three-level ANPC converter for 800&nbsp;V DC buses.</strong> In a 3L-ANPC leg each device blocks 400&nbsp;V, exactly the condition at which the half-bridge module is validated, so three modules form a phase leg with the high-frequency loop confined inside one module; the long commutation loop through the interconnect is the design problem. Target demonstration at 800&nbsp;V / 150&nbsp;A.</li>
+    </ul>
 
     <h2>Where this goes</h2>
     <p>
-      Two applications set the targets: 800&nbsp;V DC power delivery for AI data centers, where rack-level
-      converters must move kilowatts per module, and 800&nbsp;V electric-vehicle power conversion, where traction
-      and charging need high-current switches that stay efficient at high temperature. Both need GaN modules whose
-      package does not undo the speed of the device. The module and gate-drive work is part of a $5M U.S.
-      Department of Energy Vehicle Technologies Office (VTO) project (2023–present).
+      GaN's commercial success has stayed below about 3&nbsp;kW, where one die carries the whole load. The
+      high-current region, on-board chargers at 11–22&nbsp;kW, DC fast chargers at 30–350&nbsp;kW, and traction
+      inverters at 100–300&nbsp;kW, still belongs to SiC MOSFETs and Si IGBTs, because paralleling GaN is far
+      less forgiving than paralleling silicon. The same requirements are now arriving from outside transportation:
+      the 800&nbsp;V DC power architectures announced for AI data centers ask GaN for the same hundreds of
+      amperes with the same reliability, so gate-drive and packaging methods proven on EV converters carry over
+      directly. The module and gate-drive work is part of a $5M U.S. Department of Energy Vehicle Technologies
+      Office (VTO) project (2023–present).
     </p>
 
     <h2>Methods and tools</h2>
     <ul>
-      <li>Double-pulse testing (DPT) of GaN GITs and modules</li>
+      <li>Double-pulse testing of GaN HEMTs and modules from −25&nbsp;°C to 100&nbsp;°C</li>
+      <li>Transient analytical (state-space) modeling of GaN bridge legs with calibrated nonlinear capacitances</li>
       <li>LTspice simulation with vendor device models; parasitic extraction in Ansys Q3D</li>
-      <li>Thermal modeling of DBC and via-in-pad structures</li>
-      <li>Die and device characterization on a probe station</li>
-      <li>PCB and module design for multi-chip layouts</li>
+      <li>Thermal modeling of DBC and via-in-pad structures; thermal-imaging current-sharing tests</li>
+      <li>Module design and assembly: interface PCB, heavy-copper PCB, DBC, via-in-pad, SMT processes</li>
     </ul>
 
     <h2>Earlier work: energy harvesting (M.S., 2020–2023)</h2>
