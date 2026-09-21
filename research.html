@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Research — Xianchao Liu</title>
 <meta name="description" content="Gate-drive and packaging research for high-current GaN HEMTs: partial-bootstrap gate driver, temperature-adaptive NTC gate-resistor array, and a 650 V / 400 A multi-chip GaN half-bridge module for 800 V EV and data-center power conversion.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,14 +29,13 @@
     <h1>Research</h1>
     <p class="role">Packaging and gate-drive design methods for high-current GaN power modules in 800&nbsp;V data-center and EV systems.</p>
     <p>
-      GaN HEMTs have the best switching figure of merit among commercial power semiconductors, yet they are still
-      missing from the converters that would gain the most from it. GaN has been confined below a few kilowatts,
-      where a single die carries the whole load; the on-board chargers, fast chargers, and traction inverters of
-      electric vehicles process hundreds of amperes and are still built from Si and SiC. Three barriers stand in
-      the way: the narrow gate window of the p-GaN gate, the strong temperature dependence of the switching
-      transient, and a fine-pitch lateral die that resists paralleling. My dissertation,
-      <em>Switching Modeling, Driver Technology and Packaging of GaN HEMTs in High-Current Applications</em>,
-      addresses each of them at the gate-drive and package level.
+      GaN HEMTs have the best switching figure of merit of any commercial power device, yet they are still
+      confined below a few kilowatts, where a single die carries the whole load; the on-board chargers, fast
+      chargers, and traction inverters of electric vehicles run at hundreds of amperes on Si and SiC. My
+      dissertation, <em>Switching Modeling, Driver Technology and Packaging of GaN HEMTs in High-Current
+      Applications</em>, removes three barriers to fast switching at high current, the narrow gate window of the
+      p-GaN gate, the temperature dependence of the switching transient, and the fine-pitch lateral die that
+      resists paralleling, at the gate-drive and package level.
     </p>
 
     <section class="thrust" id="gate-drive">
@@ -47,16 +43,13 @@
         <h3>1. Gate-drive voltage: the partial-bootstrap gate driver</h3>
         <p class="spec">650 V p-GaN HEMT (GS-065-150) · turn-on loss vs. gate oscillation · no extra isolated supply, inductor, or control channel</p>
         <p>
-          An enhancement-mode p-GaN HEMT leaves the driver only a few volts between the Miller plateau and the
-          gate's absolute maximum, so a driver fast enough to cut turn-on loss is also one that invites
-          gate-source oscillation. The partial-bootstrap gate driver (PBGD) resolves this by stacking a
-          self-limiting bootstrap capacitor onto the drive rail only during the Miller plateau: the voltage-fall
-          interval that dominates turn-on loss is accelerated, while the current-rise interval that sets di/dt is
-          left untouched, so turn-on loss and turn-on overvoltage fall together. Double-pulse tests on 650&nbsp;V /
-          150&nbsp;A devices confirm the mechanism, and a closed-loop version whose timing is triggered by the
-          drain voltage, so that it adapts itself to load, temperature, and device size, is now in test.
-          I also work on gate drivers for gate-injection transistors (GITs), whose p-GaN gate is held on by a
-          steady current rather than a voltage.
+          An e-mode p-GaN HEMT leaves only a few volts between the Miller plateau and the gate's absolute maximum,
+          so a driver fast enough to cut turn-on loss also invites gate oscillation. The partial-bootstrap gate
+          driver (PBGD) lifts the drive rail only during the Miller plateau: the voltage-fall interval that
+          dominates turn-on loss is accelerated while the current-rise interval that sets di/dt is untouched, so
+          loss and overvoltage fall together, with no extra isolated supply, inductor, or control channel.
+          Verified in double-pulse tests on 650&nbsp;V / 150&nbsp;A devices; a closed-loop version triggered by
+          the drain voltage is in test. I also work on gate drivers for gate-injection transistors (GITs).
         </p>
       </div>
       <figure class="figure">
@@ -70,17 +63,14 @@
         <h3>2. Temperature-adaptive switching: the NTC gate-resistor array</h3>
         <p class="spec">−25 °C to 100 °C · wide-temperature transient model · series–parallel NTC array · three passive components</p>
         <p>
-          A GaN HEMT's threshold voltage barely moves with temperature while its transconductance falls, so the
-          device switches more slowly the hotter it gets, the opposite of Si and SiC, whose falling threshold
-          compensates. At the same time the crosstalk constraint that sets the gate resistance relaxes with
-          temperature, so a fixed gate resistor sized at the cold corner wastes margin everywhere else. I built a
-          wide-temperature transient model of the GaN half-bridge, coupling a temperature-dependent channel-current
-          model with calibrated nonlinear junction capacitances, and used it to extract the minimum safe gate
-          resistance at each temperature; a series–parallel array of negative-temperature-coefficient (NTC)
-          resistors is then fitted to that trajectory by constrained optimization. From −25&nbsp;°C to
-          100&nbsp;°C the array cuts turn-on time by 30% and turn-on loss by 23% at 300&nbsp;V, 120&nbsp;A, and
-          100&nbsp;°C, keeps the peak crosstalk voltage below the threshold at every operating point, and needs
-          only three passive components.
+          A GaN HEMT's threshold barely moves with temperature while its transconductance falls, so the device
+          slows down as it heats, the opposite of Si and SiC, while the crosstalk constraint that sets the gate
+          resistance relaxes. A fixed gate resistor sized at the cold corner wastes that margin. A
+          wide-temperature transient model of the half-bridge gives the minimum safe gate resistance at each
+          temperature, and a series–parallel array of negative-temperature-coefficient (NTC) resistors is fitted
+          to it by constrained optimization. From −25&nbsp;°C to 100&nbsp;°C: 30% faster turn-on and 23% lower
+          turn-on loss at 300&nbsp;V, 120&nbsp;A, and 100&nbsp;°C, with the peak crosstalk voltage below
+          threshold throughout, using three passive components.
         </p>
         <p class="related">Related: <a href="publications.html#compel2025">COMPEL 2025</a></p>
       </div>
@@ -95,16 +85,14 @@
         <h3>3. Multi-chip packaging: a 650 V / 400 A GaN half-bridge module</h3>
         <p class="spec">three 650 V / 150 A dies per switch · thin-copper interface PCB · via-in-pad vertical current paths · integrated gate drivers · double-sided cooling</p>
         <p>
-          The largest 650&nbsp;V GaN die is rated at 150&nbsp;A, two to four times short of what an EV phase leg
-          needs, so dies must be paralleled, and with nanosecond transitions, nanohenry-level mismatch decides
-          whether they share current. Modeling showed that the mismatch in source inductance, not in gate-loop
-          inductance, dominates the dynamic current imbalance: a fraction of a nanohenry is enough to unbalance the
-          dies. The module answers with a thin-copper interface PCB that carries the fine-pitch die attachment and
-          the gate drivers and connects to the heavy-copper power routing through via-in-pad vertical current
-          paths, so the two can be optimized separately; the symmetric layout holds the source-inductance
-          mismatch below 9&nbsp;pH and the power loop measures 1.62&nbsp;nH, and both faces of the module stay
-          free for heatsinks. The module is rated 650&nbsp;V / 400&nbsp;A and validated at 400&nbsp;V / 300&nbsp;A
-          in double-pulse tests and under continuous load with double-sided cooling.
+          The largest 650&nbsp;V GaN die is rated at 150&nbsp;A, so EV-class currents need paralleled dies, and
+          with nanosecond transitions a fraction of a nanohenry of source-inductance mismatch is enough to
+          unbalance them. The module puts the fine-pitch die attachment and the gate drivers on a thin-copper
+          interface PCB and reaches the heavy-copper power routing through via-in-pad vertical current paths, so
+          the two are optimized separately. The symmetric layout holds the source-inductance mismatch below
+          9&nbsp;pH with a 1.62&nbsp;nH power loop, and both faces stay free for double-sided cooling. Rated
+          650&nbsp;V / 400&nbsp;A; validated at 400&nbsp;V / 300&nbsp;A in double-pulse tests and under
+          continuous load.
         </p>
         <p class="related">Related: <a href="publications.html#iwipp2025">IWIPP 2025</a></p>
       </div>
@@ -114,23 +102,14 @@
       </figure>
     </section>
 
-    <h2>In progress</h2>
-    <ul>
-      <li><strong>Closed-loop PBGD.</strong> Experimental validation of the drain-voltage-triggered driver over temperature, gate resistance, and load current.</li>
-      <li><strong>Adaptive gate resistance on a 60&nbsp;A platform.</strong> Extending the NTC design into a design map over temperature and load current, with the loss saving against a fixed gate resistor quantified from measurements.</li>
-      <li><strong>Three-level ANPC converter for 800&nbsp;V DC buses.</strong> In a 3L-ANPC leg each device blocks 400&nbsp;V, exactly the condition at which the half-bridge module is validated, so three modules form a phase leg with the high-frequency loop confined inside one module; the long commutation loop through the interconnect is the design problem. Target demonstration at 800&nbsp;V / 150&nbsp;A.</li>
-    </ul>
-
     <h2>Where this goes</h2>
     <p>
-      GaN's commercial success has stayed below about 3&nbsp;kW, where one die carries the whole load. The
-      high-current region, on-board chargers at 11–22&nbsp;kW, DC fast chargers at 30–350&nbsp;kW, and traction
-      inverters at 100–300&nbsp;kW, still belongs to SiC MOSFETs and Si IGBTs, because paralleling GaN is far
-      less forgiving than paralleling silicon. The same requirements are now arriving from outside transportation:
-      the 800&nbsp;V DC power architectures announced for AI data centers ask GaN for the same hundreds of
-      amperes with the same reliability, so gate-drive and packaging methods proven on EV converters carry over
-      directly. The module and gate-drive work is part of a $5M U.S. Department of Energy Vehicle Technologies
-      Office (VTO) project (2023–present).
+      GaN's commercial success stops at about 3&nbsp;kW; on-board chargers (11–22&nbsp;kW), DC fast chargers
+      (30–350&nbsp;kW), and traction inverters (100–300&nbsp;kW) still belong to SiC MOSFETs and Si IGBTs. The
+      800&nbsp;V DC architectures announced for AI data centers ask GaN for the same hundreds of amperes with the
+      same reliability, so methods proven on EV converters carry over. The next step takes the half-bridge module
+      into a three-level ANPC converter for 800&nbsp;V DC buses. This work is part of a $5M U.S. Department of
+      Energy Vehicle Technologies Office (VTO) project (2023–present).
     </p>
 
     <h2>Methods and tools</h2>
