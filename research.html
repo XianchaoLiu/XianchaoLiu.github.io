@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Research — Xianchao Liu</title>
+<meta name="description" content="Research on GaN gate-injection transistor gate drive, multi-chip GaN power modules, and PCB-embedded die packaging for 800 V data-center and EV power conversion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="rail">
+    <div>
+      <a class="site-name" href="index.html">Xianchao Liu</a>
+      <p class="site-sub">Ph.D. Student<br>UTK · CURENT</p>
+    </div>
+    <nav aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p class="rail-foot">Knoxville, Tennessee</p>
+  </aside>
+
+  <main>
+
+    <h1>Research</h1>
+    <p class="role">Package-aware GaN power devices and modules for 800&nbsp;V data-center and EV power conversion.</p>
+    <p>
+      A GaN HEMT switches in a few nanoseconds, but only if its gate loop and its package let it. My research
+      treats the die, the gate drive, and the module as one design problem, in three connected thrusts.
+    </p>
+
+    <section class="thrust" id="gate-drive">
+      <div>
+        <h3>1. Gate drive for GaN gate-injection transistors</h3>
+        <p class="spec">CoolGaN 650 V G5 GIT · partial-bootstrap gate driver (PBGD) · NTC temperature-adaptive gate-resistor array · double-pulse test platform</p>
+        <p>
+          Infineon's CoolGaN 650&nbsp;V G5 devices are gate-injection transistors (GITs): the p-GaN gate behaves
+          as a diode that must be held on with a steady current and switched through a few-nanosecond transition
+          without ringing. I design gate-drive circuits built around that gate: a partial-bootstrap gate driver (PBGD), an NTC-based
+          temperature-adaptive gate-resistor array that suppresses crosstalk and keeps switching speed up as the
+          module heats, and a double-pulse test (DPT) platform for characterizing switching loss, dv/dt, and
+          gate-loop parasitics.
+        </p>
+        <p class="related">Related: <a href="publications.html#compel2025">COMPEL 2025</a></p>
+      </div>
+      <div class="figures">
+        <figure class="figure">
+          <a href="assets/gate-temperature.png"><img src="assets/gate-temperature.png" alt="Transfer characteristics of GaN HEMT, SiC MOSFET and Si MOSFET at two junction temperatures, and the resulting trends of switching speed, switching loss and crosstalk voltage versus temperature" width="1200" height="990"></a>
+          <figcaption>GaN HEMT transconductance falls as the junction heats, unlike SiC and Si MOSFETs, so a fixed gate resistance loses switching speed and gains loss with temperature — the case for a temperature-adaptive gate resistor.</figcaption>
+        </figure>
+        <figure class="figure">
+          <a href="assets/pbgd-circuit.png"><img src="assets/pbgd-circuit.png" alt="Schematic of the partial-bootstrap gate driver: an isolated partial-bootstrap turn-on circuit and a conventional turn-off circuit driving a GaN GIT" width="875" height="689"></a>
+          <figcaption>Partial-bootstrap gate driver (PBGD): a partial-bootstrap turn-on stage and a conventional turn-off stage for a GaN GIT.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="thrust" id="modules">
+      <div>
+        <h3>2. Multi-chip GaN power modules</h3>
+        <p class="spec">650 V / 400 A half-bridge · paralleled GaN dies on DBC · ultra-low parasitics · dynamic current sharing · via-in-pad interconnect</p>
+        <p>
+          Reaching the hundreds of amperes needed by traction inverters and rack-level converters means several
+          GaN dies must switch in parallel as one device. I packaged a 650&nbsp;V / 400&nbsp;A GaN half-bridge
+          power module with ultra-low parasitics on a direct-bonded-copper (DBC) substrate: a symmetric layout for
+          balanced dynamic current sharing, verified with LTspice and Ansys Q3D parasitic extraction; thermal
+          design for robustness under high-current operation; and via-in-pad interconnects between the gate-drive
+          board and the dies, with design guidelines for their thermal and electrical performance.
+        </p>
+        <p class="related">Related: <a href="publications.html#iwipp2025">IWIPP 2025</a></p>
+      </div>
+      <figure class="figure">
+        <a href="assets/module-structure.png"><img src="assets/module-structure.png" alt="Cross-section of the GaN half-bridge power module: dies on a cutout DBC with the gate driver in the cutout, an interface PCB joined by solder, a power-layout PCB, and heatsinks on both sides" width="1200" height="555"></a>
+        <figcaption>Stack-up of the 650 V / 400 A module: GaN dies on a cutout DBC with the gate driver inside the cutout, an interface PCB joined by solder, the power-layout PCB above it, and heatsinks on both sides.</figcaption>
+      </figure>
+    </section>
+
+    <section class="thrust no-figure" id="embedded">
+      <div>
+        <h3>3. PCB-embedded die packaging</h3>
+        <p class="spec">die embedded in the PCB stack · up to 250 °C · copper-core laminate · filled and plated vias · ultra-thin passives</p>
+        <p>
+          Embedding the GaN die inside the printed-circuit-board stack removes wire bonds and shrinks the gate and
+          power loops to a few millimeters. I am developing an embedded-die architecture designed to operate up to
+          250&nbsp;°C, built on copper-core laminates with filled, plated vias, and with ultra-thin passives
+          (silicon capacitors, DFN Zener diodes) placed inside the stack next to the die.
+        </p>
+      </div>
+      <!-- When a figure is ready, drop the "no-figure" class above and add:
+      <figure class="figure">
+        <a href="assets/embedded-die.png"><img src="assets/embedded-die.png" alt="" width="" height=""></a>
+        <figcaption>Cross-section of the PCB-embedded GaN die structure.</figcaption>
+      </figure> -->
+    </section>
+
+    <h2>Where this goes</h2>
+    <p>
+      Two applications set the targets: 800&nbsp;V DC power delivery for AI data centers, where rack-level
+      converters must move kilowatts per module, and 800&nbsp;V electric-vehicle power conversion, where traction
+      and charging need high-current switches that stay efficient at high temperature. Both need GaN modules whose
+      package does not undo the speed of the device. The module and gate-drive work is part of a $5M U.S.
+      Department of Energy Vehicle Technologies Office (VTO) project (2023–present).
+    </p>
+
+    <h2>Methods and tools</h2>
+    <ul>
+      <li>Double-pulse testing (DPT) of GaN GITs and modules</li>
+      <li>LTspice simulation with vendor device models; parasitic extraction in Ansys Q3D</li>
+      <li>Thermal modeling of DBC and via-in-pad structures</li>
+      <li>Die and device characterization on a probe station</li>
+      <li>PCB and module design for embedded-die and multi-chip layouts</li>
+    </ul>
+
+    <h2>Earlier work: energy harvesting (M.S., 2020–2023)</h2>
+    <p>
+      At Huazhong University of Science and Technology I worked on electromagnetic vibration energy harvesting
+      and the micro-power converters that go with it: non-uniform planar coils for higher output power, fully
+      self-powered maximum-power-point tracking, and multi-input AC–DC converters for combining harvesters. That
+      work appears in <em>IEEE Transactions on Power Electronics</em>, <em>IEEE Transactions on Magnetics</em>,
+      <em>IEEE Transactions on Industry Applications</em>, and at ECCE; see <a href="publications.html">Publications</a>.
+    </p>
+
+    <footer class="foot">© 2026 Xianchao Liu · Last updated September 2026</footer>
+
+  </main>
+</div>
+</body>
+</html>
