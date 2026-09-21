@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Research — Xianchao Liu</title>
-<meta name="description" content="Research on GaN gate-injection transistor gate drive, multi-chip GaN power modules, and PCB-embedded die packaging for 800 V data-center and EV power conversion.">
+<meta name="description" content="Research on gate drive for GaN transistors and multi-chip GaN power modules for 800 V data-center and EV power conversion.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -30,10 +30,10 @@
   <main>
 
     <h1>Research</h1>
-    <p class="role">Package-aware GaN power devices and modules for 800&nbsp;V data-center and EV power conversion.</p>
+    <p class="role">Packaging and gate-drive design methods for high-current GaN power modules in 800&nbsp;V data-center and EV systems.</p>
     <p>
       A GaN HEMT switches in a few nanoseconds, but only if its gate loop and its package let it. My research
-      treats the die, the gate drive, and the module as one design problem, in three connected thrusts.
+      treats the die, the gate drive, and the module as one design problem, in two connected thrusts.
     </p>
 
     <section class="thrust" id="gate-drive">
@@ -82,23 +82,6 @@
       </figure>
     </section>
 
-    <section class="thrust no-figure" id="embedded">
-      <div>
-        <h3>3. PCB-embedded die packaging</h3>
-        <p class="spec">die embedded in the PCB stack · up to 250 °C · copper-core laminate · filled and plated vias · ultra-thin passives</p>
-        <p>
-          Embedding the GaN die inside the printed-circuit-board stack removes wire bonds and shrinks the gate and
-          power loops to a few millimeters. I am developing an embedded-die architecture designed to operate up to
-          250&nbsp;°C, built on copper-core laminates with filled, plated vias, and with ultra-thin passives
-          (silicon capacitors, DFN Zener diodes) placed inside the stack next to the die.
-        </p>
-      </div>
-      <!-- When a figure is ready, drop the "no-figure" class above and add:
-      <figure class="figure">
-        <a href="assets/embedded-die.png"><img src="assets/embedded-die.png" alt="" width="" height=""></a>
-        <figcaption>Cross-section of the PCB-embedded GaN die structure.</figcaption>
-      </figure> -->
-    </section>
 
     <h2>Where this goes</h2>
     <p>
@@ -115,7 +98,7 @@
       <li>LTspice simulation with vendor device models; parasitic extraction in Ansys Q3D</li>
       <li>Thermal modeling of DBC and via-in-pad structures</li>
       <li>Die and device characterization on a probe station</li>
-      <li>PCB and module design for embedded-die and multi-chip layouts</li>
+      <li>PCB and module design for multi-chip layouts</li>
     </ul>
 
     <h2>Earlier work: energy harvesting (M.S., 2020–2023)</h2>
