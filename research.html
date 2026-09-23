@@ -41,7 +41,6 @@
     <section class="thrust" id="gate-drive">
       <div>
         <h3>1. Gate-drive voltage: the partial-bootstrap gate driver</h3>
-        <p class="spec">650 V p-GaN HEMT (GS-065-150) · turn-on loss vs. gate oscillation · no extra isolated supply, inductor, or control channel</p>
         <p>
           An e-mode p-GaN HEMT leaves only a few volts between the Miller plateau and the gate's absolute maximum,
           so a driver fast enough to cut turn-on loss also invites gate oscillation. The partial-bootstrap gate
@@ -61,7 +60,6 @@
     <section class="thrust" id="temperature">
       <div>
         <h3>2. Temperature-adaptive switching: the NTC gate-resistor array</h3>
-        <p class="spec">−25 °C to 100 °C · wide-temperature transient model · series–parallel NTC array · three passive components</p>
         <p>
           A GaN HEMT's threshold barely moves with temperature while its transconductance falls, so the device
           slows down as it heats, the opposite of Si and SiC, while the crosstalk constraint that sets the gate
@@ -70,7 +68,7 @@
           temperature, and a series–parallel array of negative-temperature-coefficient (NTC) resistors is fitted
           to it by constrained optimization. From −25&nbsp;°C to 100&nbsp;°C: 30% faster turn-on and 23% lower
           turn-on loss at 300&nbsp;V, 120&nbsp;A, and 100&nbsp;°C, with the peak crosstalk voltage below
-          threshold throughout, using three passive components.
+          threshold throughout.
         </p>
         <p class="related">Related: <a href="publications.html#compel2025">COMPEL 2025</a></p>
       </div>
@@ -83,23 +81,34 @@
     <section class="thrust" id="modules">
       <div>
         <h3>3. Multi-chip packaging: a 650 V / 400 A GaN half-bridge module</h3>
-        <p class="spec">three 650 V / 150 A dies per switch · thin-copper interface PCB · via-in-pad vertical current paths · integrated gate drivers · double-sided cooling</p>
         <p>
           The largest 650&nbsp;V GaN die is rated at 150&nbsp;A, so EV-class currents need paralleled dies, and
           with nanosecond transitions a fraction of a nanohenry of source-inductance mismatch is enough to
           unbalance them. The module puts the fine-pitch die attachment and the gate drivers on a thin-copper
           interface PCB and reaches the heavy-copper power routing through via-in-pad vertical current paths, so
-          the two are optimized separately. The symmetric layout holds the source-inductance mismatch below
-          9&nbsp;pH with a 1.62&nbsp;nH power loop, and both faces stay free for double-sided cooling. Rated
-          650&nbsp;V / 400&nbsp;A; validated at 400&nbsp;V / 300&nbsp;A in double-pulse tests and under
-          continuous load.
+          the two are optimized separately. Each die pad lands on a PCB pad that a cluster of filled vias ties
+          straight down to the heavy copper, so the load current leaves the die vertically instead of crowding
+          through the thin interface copper, and the commutation loop closes in the thickness of the stack. The
+          symmetric layout holds the source-inductance mismatch below 9&nbsp;pH with a 1.62&nbsp;nH power loop,
+          and both faces stay free for double-sided cooling. Rated 650&nbsp;V / 400&nbsp;A; validated at
+          400&nbsp;V / 300&nbsp;A in double-pulse tests and under continuous load.
         </p>
         <p class="related">Related: <a href="publications.html#iwipp2025">IWIPP 2025</a></p>
       </div>
-      <figure class="figure">
-        <a href="assets/module-structure.png"><img src="assets/module-structure.png" alt="Cross-section of the GaN half-bridge power module: dies on a cutout DBC with the gate driver in the cutout, an interface PCB joined by solder, a power-layout PCB, and heatsinks on both sides" width="1200" height="555"></a>
-        <figcaption>Stack-up of the module: GaN dies on a cutout DBC with the gate driver inside the cutout, a thin-copper interface PCB joined by solder, the heavy-copper power-layout PCB above it, and heatsinks on both faces.</figcaption>
-      </figure>
+      <div class="figures">
+        <figure class="figure">
+          <a href="assets/module-structure.png"><img src="assets/module-structure.png" alt="Cross-section of the GaN half-bridge power module: dies on a cutout DBC with the gate driver in the cutout, an interface PCB joined by solder, a power-layout PCB, and heatsinks on both sides" width="1200" height="555"></a>
+          <figcaption>Stack-up of the module: GaN dies on a cutout DBC with the gate driver inside the cutout, a thin-copper interface PCB joined by solder, the heavy-copper power-layout PCB above it, and heatsinks on both faces.</figcaption>
+        </figure>
+        <figure class="figure">
+          <a href="assets/via-in-pad.png"><img src="assets/via-in-pad.png" alt="Exploded view of the via-in-pad interconnect: die pads over PCB pads, each tied by a cluster of filled vias to the heavy copper below; inset with the via diameter, pitch and length" width="1200" height="617"></a>
+          <figcaption>Via-in-pad vertical current path: each die pad sits on a PCB pad that a cluster of filled vias connects straight down to the heavy copper, so the interface PCB never has to carry the bus current laterally.</figcaption>
+        </figure>
+        <figure class="figure">
+          <a href="assets/current-distribution.png"><img src="assets/current-distribution.png" alt="Simulated current density on the interface PCB: (a) lateral routing through thin copper with current crowding up to 150 A/mm²; (b) via-in-pad vertical paths with the current spread evenly at a fraction of that density" width="900" height="776"></a>
+          <figcaption>Simulated current density: (a) with the current routed laterally through the thin interface copper it crowds to 150&nbsp;A/mm²; (b) with via-in-pad vertical paths it spreads evenly at a fraction of that density.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <h2>Where this goes</h2>
