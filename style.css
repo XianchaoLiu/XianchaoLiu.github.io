@@ -228,6 +228,8 @@ main {
   padding-top: 0.2rem;
 }
 .facts dd { margin: 0; }
+.expertise { gap: 0.6rem 1.25rem; margin-top: 0.25rem; }
+.expertise dd { line-height: 1.55; }
 
 .news-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
 .news-list li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 1rem; }

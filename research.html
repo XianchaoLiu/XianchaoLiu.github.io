@@ -35,7 +35,8 @@
       dissertation, <em>Switching Modeling, Driver Technology and Packaging of GaN HEMTs in High-Current
       Applications</em>, removes three barriers to fast switching at high current, the narrow gate window of the
       p-GaN gate, the temperature dependence of the switching transient, and the fine-pitch lateral die that
-      resists paralleling, at the gate-drive and package level.
+      resists paralleling, at the gate-drive and package level. The module and gate-drive work is part of a $5M
+      U.S. Department of Energy Vehicle Technologies Office (VTO) project (2023–present).
     </p>
 
     <section class="thrust" id="gate-drive">
@@ -111,23 +112,21 @@
       </div>
     </section>
 
-    <h2>Where this goes</h2>
-    <p>
-      GaN's commercial success stops at about 3&nbsp;kW; on-board chargers (11–22&nbsp;kW), DC fast chargers
-      (30–350&nbsp;kW), and traction inverters (100–300&nbsp;kW) still belong to SiC MOSFETs and Si IGBTs. The
-      gate-drive and packaging methods above are aimed at exactly that region: letting GaN switch at its own
-      speed while carrying the currents those converters need. This work is part of a $5M U.S. Department of
-      Energy Vehicle Technologies Office (VTO) project (2023–present).
-    </p>
-
-    <h2>Methods and tools</h2>
-    <ul>
-      <li>Double-pulse testing of GaN HEMTs and modules from −25&nbsp;°C to 100&nbsp;°C</li>
-      <li>Transient analytical (state-space) modeling of GaN bridge legs with calibrated nonlinear capacitances</li>
-      <li>LTspice simulation with vendor device models; parasitic extraction in Ansys Q3D</li>
-      <li>Thermal modeling of DBC and via-in-pad structures; thermal-imaging current-sharing tests</li>
-      <li>Module design and assembly: interface PCB, heavy-copper PCB, DBC, via-in-pad, SMT processes</li>
-    </ul>
+    <h2>Methods and expertise</h2>
+    <dl class="facts expertise">
+      <dt>Characterization</dt>
+      <dd>Double-pulse testing of GaN HEMTs and multi-chip modules from −25&nbsp;°C to 100&nbsp;°C; static I–V and C–V characterization; thermal-imaging current-sharing tests of paralleled dies; continuous-load and converter-level testing of power modules; die-level probing on a probe station.</dd>
+      <dt>Modeling</dt>
+      <dd>Transient analytical (state-space) modeling of GaN bridge legs with temperature-dependent channel-current models and calibrated nonlinear capacitances; switching-loss and crosstalk prediction over temperature and load; SPICE simulation (LTspice) with vendor device models; parasitic extraction and current-density simulation in Ansys Q3D; thermal modeling of DBC and via-in-pad structures.</dd>
+      <dt>Gate drive</dt>
+      <dd>Isolated gate-drive design for e-mode GaN (Schottky-gate and GIT); bootstrap and drive-voltage shaping circuits; passive temperature-adaptive gate resistance (NTC arrays); gate-oscillation and crosstalk analysis; drain-voltage sensing for closed-loop switching control.</dd>
+      <dt>Packaging</dt>
+      <dd>Multi-chip module layout for balanced dynamic current sharing; DBC substrate and heavy-copper PCB design; interface-PCB and via-in-pad interconnects; die attach, solder reflow and SMT assembly; double-sided cooling and thermal design.</dd>
+      <dt>Devices</dt>
+      <dd>650&nbsp;V p-GaN HEMTs (GS-065 series / CoolGaN), GaN GITs, SiC MOSFETs; paralleled discrete and bare-die configurations.</dd>
+      <dt>Applications</dt>
+      <dd>Electric-vehicle power conversion (on-board chargers, DC fast chargers, traction inverters); electromagnetic vibration energy harvesting and micro-power converters (M.S. work).</dd>
+    </dl>
 
     <h2>Earlier work: energy harvesting (M.S., 2020–2023)</h2>
     <p>
